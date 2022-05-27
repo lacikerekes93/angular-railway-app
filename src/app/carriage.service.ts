@@ -24,7 +24,12 @@ export class CarriageService {
   }
 
   createCarriage(carriage: any): Observable<any> {
-    return this.requestService.post(`${CARRIAGE_URL}/`, carriage);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.requestService.post(`${CARRIAGE_URL}/create`, carriage, httpOptions);
   }
 
   updateCarriage(carriage: any): Observable<any> {

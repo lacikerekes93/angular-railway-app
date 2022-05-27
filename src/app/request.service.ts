@@ -15,6 +15,7 @@ export class RequestService {
   }
 
   post<T>(url: string, body: any,  options: object = {}): Observable<T> {
+    console.log(body)
     return this.http.post<T>(url, body, options).pipe(
       catchError(this.handleError)
     );

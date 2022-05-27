@@ -1,1 +1,45 @@
-<p>carriage-create works!</p>
+<div mat-dialog-content>
+  <form [formGroup]="carriageForm" (ngSubmit)="onSubmit(carriageForm.value)">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Event's name</mat-label>
+        <input matInput placeholder="Name" formControlName="carriageId">
+        <mat-hint>Give the event a name</mat-hint>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Event's description</mat-label>
+        <input matInput placeholder="Description" formControlName="manufacturedYear">
+        <mat-hint>Give the event a description</mat-hint>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Event's start time</mat-label>
+        <input matInput placeholder="Start" formControlName="railId">
+        <mat-hint>Give the event a start time</mat-hint>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Event's start time</mat-label>
+        <input matInput placeholder="Start" formControlName="owner">
+        <mat-hint>Give the event a start time</mat-hint>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Event's start time</mat-label>
+        <input matInput placeholder="Start" formControlName="site">
+        <mat-hint>Give the event a start time</mat-hint>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type>Create</button>
+  </form>
+</div>
