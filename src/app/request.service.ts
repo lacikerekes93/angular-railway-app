@@ -22,6 +22,8 @@ export class RequestService {
   }
 
   put<T>(url: string, body: any, options: object = {}): Observable<T> {
+    console.log(url);
+    console.log(body);
     return this.http.put<T>(url, body, options).pipe(
       catchError(this.handleError)
     );

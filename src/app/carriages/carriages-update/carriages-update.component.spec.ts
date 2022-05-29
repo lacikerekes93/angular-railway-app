@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarriageListComponent } from './carriage-list.component';
+import { CarriagesUpdateComponent } from './carriages-update.component';
 
-describe('CarriageListComponent', () => {
-  let component: CarriageListComponent;
-  let fixture: ComponentFixture<CarriageListComponent>;
+describe('CarriagesUpdateComponent', () => {
+  let component: CarriagesUpdateComponent;
+  let fixture: ComponentFixture<CarriagesUpdateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarriageListComponent ]
+      declarations: [ CarriagesUpdateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarriageListComponent);
+    fixture = TestBed.createComponent(CarriagesUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

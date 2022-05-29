@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarriageCreateComponent } from './carriage-create.component';
+import { CarriagesTableComponent } from './carriages-table.component';
 
-describe('CarriageCreateComponent', () => {
-  let component: CarriageCreateComponent;
-  let fixture: ComponentFixture<CarriageCreateComponent>;
+describe('CarriageTableComponent', () => {
+  let component: CarriagesTableComponent;
+  let fixture: ComponentFixture<CarriagesTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarriageCreateComponent ]
+      declarations: [ CarriagesTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarriageCreateComponent);
+    fixture = TestBed.createComponent(CarriagesTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

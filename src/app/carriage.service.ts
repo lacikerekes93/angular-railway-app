@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 import { HttpHeaders } from '@angular/common/http';
+import {CarriageModel} from "./carriages/store/carriages.model";
 
 const CARRIAGE_URL = 'api/carriages';
 
@@ -19,30 +20,31 @@ export class CarriageService {
     return this.requestService.get<any>(CARRIAGE_URL, httpOptions);
   }
 
-  getCarriage(carriageId: number): Observable<any>{
+  getCarriage(carriageId: string): Observable<any>{
     return this.requestService.get(`${CARRIAGE_URL}/${carriageId}`);
   }
 
-  createCarriage(carriage: any): Observable<any> {
+  createCarriage(carriage: CarriageModel): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       })
     };
-    return this.requestService.post(`${CARRIAGE_URL}/create`, carriage, httpOptions);
+    return this.requestService.post(`${CARRIAGE_URL}`, carriage, httpOptions);
   }
 
-  updateCarriage(carriage: any): Observable<any> {
+  updateCarriage(carriage: CarriageModel): Observable<any> {
+    console.log(carriage)
     return this.requestService.put(`${CARRIAGE_URL}/`, carriage);
   }
 
-  deleteEvent(carriageId: number): Observable<any> {
+  deleteCarriage(carriage: CarriageModel): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       })
     };
-    const url = `${CARRIAGE_URL}/${carriageId}`;
+    const url = `${CARRIAGE_URL}/${carriage.id}`;
     return this.requestService.delete(url, httpOptions);
   }
 

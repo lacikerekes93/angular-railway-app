@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import {CarriageTable} from "./data/carriages.data";
+import {SiteTable} from "./data/sites.data";
 @Injectable({
   providedIn: 'root'
 })
@@ -8,30 +10,11 @@ export class DataService implements InMemoryDbService {
   }
 
   createDb() {
-    return {
-      carriages: [
-        {
-          carriageId: 'Bhv',
-          manufacturedYear: 2020,
-          railId: '50 55 20-05 555-7',
-          owner: 'MÁV',
-          site: 'Bp'
-        },
-        {
-          carriageId: 'BDbhv',
-          manufacturedYear: 2021,
-          railId: '50 55 20-05 555-7',
-          owner: 'MÁV',
-          site: 'Bp'
-        },
-        {
-          carriageId: 'AcBc',
-          manufacturedYear: 2022,
-          railId: '50 55 20-05 555-7',
-          owner: 'MÁV',
-          site: 'Bp'
-        }
-      ]
-    };
+    const db = {
+      carriages: CarriageTable.carriages,
+      sites: SiteTable.sites,
+    }
+    return db;
   }
+
 }

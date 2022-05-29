@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './carriages.component.html',
   styleUrls: ['./carriages.component.css']
 })
-export class CarriagesComponent implements OnInit {
+export class CarriagesComponentSpec implements OnInit {
 
   constructor() { }
 

@@ -11,19 +11,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DataService } from './data.service';
 import { RequestService } from './request.service';
-import { CarriagesModule } from './carriages/carriages.module';
+import { CarriagesModule } from './carriages/carriages/carriages.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {CarriagesFeatureState} from "./carriages/store/carriages.reducer";
+import { CarriagesFeatureState } from "./carriages/store/carriages.reducer";
+import { MainComponent } from "./main.component";
+import { MatCardModule } from '@angular/material/card';
 
 export interface AppState {
-  carriagesFeatures: CarriagesFeatureState;
+  carriagesFeature: CarriagesFeatureState;
 }
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, MainComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ export interface AppState {
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     BrowserAnimationsModule,
+    MatCardModule,
     environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(DataService) : [],
     HttpClientModule,
     CarriagesModule,

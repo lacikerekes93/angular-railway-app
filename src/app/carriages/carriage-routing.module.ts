@@ -1,28 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CarriagesComponent} from './carriages.component'
-import { CarriageTableComponent } from './carriage-table/carriage-table.component';
-import { CarriageCreateComponent } from './carriage-create/carriage-create.component';
+import {CarriagesComponentSpec} from './carriages/carriages.component.spec'
+import { CarriagesTableComponent } from './carriages-table/carriages-table.component';
+import { CarriagesCreateComponent } from './carriages-create/carriages-create.component';
+import {CarriagesUpdateComponent} from "./carriages-update/carriages-update.component";
 
 const routes: Routes = [
   { path: '',
-    component: CarriagesComponent,
+    component: CarriagesComponentSpec,
     children: [{
       path: '',
       children: [
         {
           path: '',
-          component: CarriageTableComponent
+          component: CarriagesTableComponent
+        },
+        {
+          path: 'edit/:carriageId',
+          component: CarriagesUpdateComponent
         },
         {
           path: 'create',
-          component: CarriageCreateComponent
+          component: CarriagesCreateComponent
         }
       ]
     }]
   },
   { path: '', redirectTo: '/carriages', pathMatch: 'full' },
-  { path: '**', component: CarriageTableComponent },
+  { path: '**', component: CarriagesTableComponent },
 ];
 
 @NgModule({
