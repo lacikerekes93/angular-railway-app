@@ -6,4 +6,6 @@ export class CarriageModel implements Carriage {
   railId!: string;
   owner!: string;
   siteId!: number;
+  siteName?: string;
+  deleted!: boolean;
 }

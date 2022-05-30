@@ -1,0 +1,35 @@
+<form [formGroup]="siteForm" (ngSubmit)="onSubmit(siteForm.getRawValue())">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Site name</mat-label>
+      <input matInput placeholder="E.g.: asdfsdf" formControlName="name">
+      <mat-hint>Provide the name of the site</mat-hint>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Site name</mat-label>
+      <input matInput placeholder="E.g.: MÁV" formControlName="owner">
+      <mat-hint>Provide the owner of the site</mat-hint>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Site Address</mat-label>
+      <input matInput placeholder="Budapest, Mozdony utca 12." formControlName="address">
+      <mat-hint>Provide the address of the site</mat-hint>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Code of the site</mat-label>
+      <input matInput placeholder="e.g.: MAV1233" formControlName="code">
+      <mat-hint>Give the code of the site</mat-hint>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" type>Update</button>
+</form>

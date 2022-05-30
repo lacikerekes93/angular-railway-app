@@ -39,6 +39,7 @@ export class CarriagesCreateComponent implements OnInit {
 
   onSubmit(carriageData: any) {
     alert('Form submitted:\n' + JSON.stringify(carriageData));
+    carriageData.deleted = false;
     this.store.dispatch(carriageCreateAction(carriageData))
     this.carriageForm.reset();
     this.router.navigate(['/carriages']);

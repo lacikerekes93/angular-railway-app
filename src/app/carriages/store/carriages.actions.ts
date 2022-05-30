@@ -44,7 +44,3 @@ export const carriageDeleteAction = createAction(
   CarriageActionTypes.carriageDelete,
   props<{carriage: CarriageModel}>()
 );
-export const carriageDeletedAction = createAction(
-  CarriageActionTypes.carriageDeleted,
-  props<{carriage: CarriageModel}>()
-);

@@ -52,7 +52,9 @@ export class CarriageEffects {
                 manufacturedYear: action.manufacturedYear,
                 railId: action.railId,
                 owner: action.owner,
-                siteId: action.siteId
+                siteId: action.siteId,
+                siteName: '',
+                deleted: false
               }
             });
           }),
@@ -72,7 +74,9 @@ export class CarriageEffects {
               manufacturedYear: action['manufacturedYear'],
               railId: action['railId'],
               owner: action['owner'],
-              siteId: action['siteId']
+              siteId: action['siteId'],
+              siteName: '',
+              deleted: false
             }});
         }),
         catchError(() => EMPTY)

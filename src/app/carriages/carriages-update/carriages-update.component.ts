@@ -30,12 +30,11 @@ export class CarriagesUpdateComponent implements OnInit {
         console.log(carriage);
         console.log(this.carriageForm);
         if(carriage && this.carriageForm) {
-          console.log("Hi");
           this.carriageForm.controls['id'].setValue(carriage.id);
           this.carriageForm.controls['manufacturedYear'].setValue(carriage.manufacturedYear);
           this.carriageForm.controls['railId'].setValue(carriage.railId);
           this.carriageForm.controls['owner'].setValue(carriage.owner);
-          this.carriageForm.controls['site'].setValue(carriage.siteId);
+          this.carriageForm.controls['siteId'].setValue(carriage.siteId);
         }
       }
     );
@@ -44,7 +43,8 @@ export class CarriagesUpdateComponent implements OnInit {
       'manufacturedYear': [''],
       'railId': [''],
       'owner':[''],
-      'site': ['']
+      'siteId': [''],
+      'deleted': [false]
     });
   }
 

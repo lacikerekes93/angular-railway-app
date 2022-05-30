@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 import { HttpHeaders } from '@angular/common/http';
 import {CarriageModel} from "./carriages/store/carriages.model";
+import {Carriage} from "./data/carriages.data";
 
 const CARRIAGE_URL = 'api/carriages';
 
@@ -17,7 +18,7 @@ export class CarriageService {
         'Content-Type':  'application/json'
       })
     };
-    return this.requestService.get<any>(CARRIAGE_URL, httpOptions);
+    return this.requestService.get<Carriage[]>(`${CARRIAGE_URL}/?deleted=false`, httpOptions);
   }
 
   getCarriage(carriageId: string): Observable<any>{
@@ -39,13 +40,8 @@ export class CarriageService {
   }
 
   deleteCarriage(carriage: CarriageModel): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
-    const url = `${CARRIAGE_URL}/${carriage.id}`;
-    return this.requestService.delete(url, httpOptions);
+    carriage = Object.assign({}, carriage, {deleted: true})
+    return this.updateCarriage(carriage)
   }
 
   /*

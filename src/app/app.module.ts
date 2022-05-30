@@ -11,16 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DataService } from './data.service';
 import { RequestService } from './request.service';
-import { CarriagesModule } from './carriages/carriages/carriages.module';
+import { CarriagesModule } from './carriages/carriages.module';
+import { SitesModule } from './sites/sites.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CarriagesFeatureState } from "./carriages/store/carriages.reducer";
 import { MainComponent } from "./main.component";
 import { MatCardModule } from '@angular/material/card';
+import {SitesFeatureState} from "./sites/store/sites.reducer";
 
 export interface AppState {
   carriagesFeature: CarriagesFeatureState;
+  sitesFeature: SitesFeatureState;
 }
 
 @NgModule({
@@ -37,6 +40,7 @@ export interface AppState {
     environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(DataService) : [],
     HttpClientModule,
     CarriagesModule,
+    SitesModule,
   ],
   providers: [RequestService, DataService, ],
   bootstrap: [AppComponent]

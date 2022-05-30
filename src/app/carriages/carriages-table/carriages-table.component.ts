@@ -12,7 +12,7 @@ import {CarriageModel} from "../store/carriages.model";
 })
 export class CarriagesTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id','railId','site','actions'] ;
+  displayedColumns: string[] = ['id','railId','siteName','actions'] ;
 
   constructor(
     private carriageService: CarriageService,
