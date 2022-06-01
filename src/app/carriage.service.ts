@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {combineLatest, Observable, tap} from 'rxjs';
 import { RequestService } from './request.service';
 import { HttpHeaders } from '@angular/common/http';
 import {CarriageModel} from "./carriages/store/carriages.model";
 import {Carriage} from "./data/carriages.data";
+import {map} from "rxjs/operators";
+import {SitesService} from "./sites.service";
+import {Site} from "./data/sites.data";
 
 const CARRIAGE_URL = 'api/carriages';
+const SITE_URL = 'api/sites';
 
 @Injectable()
 export class CarriageService {
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService,
+              private sitesService: SitesService) { }
 
   getCarriages(): Observable<any> {
     const httpOptions = {
@@ -18,7 +23,18 @@ export class CarriageService {
         'Content-Type':  'application/json'
       })
     };
-    return this.requestService.get<Carriage[]>(`${CARRIAGE_URL}/?deleted=false`, httpOptions);
+
+    const carriages$ = this.requestService.get<Carriage[]>(`${CARRIAGE_URL}/?deleted=false`, httpOptions)
+    const sites$ = this.requestService.get<Site[]>(`${SITE_URL}/?deleted=false`, httpOptions)
+
+    return combineLatest(
+      [carriages$, sites$],
+      (carriages, sites) =>
+        carriages.map((c) => ({
+          ...c,
+          siteName: sites.filter((s) => s.id === c.siteId).map(s => s.name)[0],
+        }))
+    ).pipe(tap(x  =>  console.log("GETTER",x)))
   }
 
   getCarriage(carriageId: string): Observable<any>{

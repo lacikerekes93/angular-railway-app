@@ -33,7 +33,7 @@ export class CarriagesCreateComponent implements OnInit {
       'railId': [''],
       'manufacturedYear': [''],
       'owner': [''],
-      'site': [''],
+      'siteId': [''],
     });
   }
 

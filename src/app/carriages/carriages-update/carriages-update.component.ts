@@ -3,8 +3,11 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {select, Store} from "@ngrx/store";
 import {carriageRequestedAction, carriageUpdateAction} from "../store/carriages.actions";
-import { selectLoadedCarriage } from '../store/carriages.selectors';
+import {selectCarriages, selectLoadedCarriage} from '../store/carriages.selectors';
 import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {Carriage} from "../../data/carriages.data";
+import {CarriageModel} from "../store/carriages.model";
 
 @Component({
   selector: 'app-carriages-update',
@@ -14,6 +17,7 @@ import {map} from "rxjs/operators";
 export class CarriagesUpdateComponent implements OnInit {
 
   carriageForm!: FormGroup;
+  carriages$: Observable<CarriageModel[]> = this.store.pipe(select(selectCarriages));
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -34,7 +38,7 @@ export class CarriagesUpdateComponent implements OnInit {
           this.carriageForm.controls['manufacturedYear'].setValue(carriage.manufacturedYear);
           this.carriageForm.controls['railId'].setValue(carriage.railId);
           this.carriageForm.controls['owner'].setValue(carriage.owner);
-          this.carriageForm.controls['siteId'].setValue(carriage.siteId);
+          this.carriageForm.controls['siteId'].setValue(+carriage.siteId);
         }
       }
     );
@@ -46,9 +50,12 @@ export class CarriagesUpdateComponent implements OnInit {
       'siteId': [''],
       'deleted': [false]
     });
+
+    this.carriages$.subscribe(a => console.log('CARRIAGES', a));
   }
 
   onSubmit(carriageData: any) {
+    console.log("CARRIAGEDATA", carriageData)
     this.store.dispatch(carriageUpdateAction(carriageData));
     this.carriageForm.reset();
     this.router.navigate(['/carriages']);

@@ -5,15 +5,13 @@ import { HttpHeaders } from '@angular/common/http';
 import { map, debounceTime, exhaustMap } from 'rxjs/operators';
 import { Site } from './data/sites.data';
 import { SiteModel } from './sites/store/sites.model';
-import {CarriageService} from "./carriage.service";
 
 const SITE_URL = 'api/sites';
 
 @Injectable()
 export class SitesService {
 
-  constructor(private requestService: RequestService,
-  private carriageService: CarriageService) { }
+  constructor(private requestService: RequestService) { }
 
   getSites(): Observable<Site[]> {
     const httpOptions = {
@@ -37,15 +35,8 @@ export class SitesService {
   }
 
   deleteSite(site: SiteModel): Observable<any> {
-    return this.carriageService.getCarriages().pipe(
-      exhaustMap(res => {
-        if(res.filter((b: any) => b.siteId === site.id).length > 0){
-          throw new Error('Cannot delete site!');
-        }
         site = Object.assign({}, site, {deleted: true});
         return this.updateSite(site);
-      })
-    );
   }
 
 }

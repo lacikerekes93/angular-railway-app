@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import {combineLatestWith, EMPTY, tap} from 'rxjs';
+import { map, mergeMap, catchError, switchMap, combineLatest } from 'rxjs/operators';
 import { CarriageService } from '../../carriage.service';
+import { SitesService } from '../../sites.service';
 import {
   CarriageActionTypes,
   carriageCreatedAction, carriageLoadedAction,
@@ -67,6 +68,7 @@ export class CarriageEffects {
   updateCarriage$ = createEffect(() => this.actions$.pipe(
     ofType(CarriageActionTypes.carriageUpdate),
     switchMap((action) => {
+      console.log("ACTION", action)
       return this.carriageService.updateCarriage(action).pipe(
         map((item: any) => {
           return carriageUpdateAction({carriage: {
@@ -103,6 +105,7 @@ export class CarriageEffects {
   constructor(
     private actions$: Actions,
     private carriageService: CarriageService,
+    private sitesService: SitesService,
     private store: Store
   ) {}
 }
