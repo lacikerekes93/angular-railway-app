@@ -24,7 +24,7 @@ export class CarriageService {
       })
     };
 
-    const carriages$ = this.requestService.get<Carriage[]>(`${CARRIAGE_URL}/?deleted=false`, httpOptions)
+    const carriages$ = this.requestService.get<Carriage[]>(`${CARRIAGE_URL}/`, httpOptions)
     const sites$ = this.requestService.get<Site[]>(`${SITE_URL}/?deleted=false`, httpOptions)
 
     return combineLatest(

@@ -4,15 +4,15 @@
         <mat-label>Carriage identifier</mat-label>
         <input matInput placeholder="E.g.: MAV023467bd" formControlName="id">
         <mat-hint>Provide the identifier of the carriage</mat-hint>
-        <mat-error>This field is required</mat-error>
+        <mat-error *ngIf="id.invalid">{{getIdErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Year of manufacture</mat-label>
-        <input matInput placeholder="E.g: 2005" formControlName="manufacturedYear">
+        <input matInput type="number" placeholder="E.g: 2005" formControlName="manufacturedYear">
         <mat-hint>Give the year of manufacture</mat-hint>
-        <mat-error>This field is required</mat-error>
+        <mat-error *ngIf="manufacturedYear.invalid">{{getManufacturedYearErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -20,7 +20,7 @@
         <mat-label>Rail identifier</mat-label>
         <input matInput placeholder="505520-05555-7" formControlName="railId">
         <mat-hint>Provide the rail identifier</mat-hint>
-        <mat-error>This field is required</mat-error>
+        <mat-error *ngIf="railId.invalid">{{getRailIdErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -28,7 +28,7 @@
         <mat-label>Owner of carriage</mat-label>
         <input matInput placeholder="e.g.: MAV" formControlName="owner">
         <mat-hint>Give the owner of the carriage</mat-hint>
-        <mat-error>This field is required</mat-error>
+        <mat-error *ngIf="owner.invalid">{{getOwnerErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <div>

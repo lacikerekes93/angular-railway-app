@@ -2,9 +2,17 @@
   <a mat-mini-fab routerLink="/carriages/create" color="primary">
     <mat-icon>add</mat-icon>
   </a>
+
+  <mat-slide-toggle (change)="deletedCarriageToggle($event)"
+    class="example-margin"
+    [color]="color"
+    [checked]="checked"
+    [disabled]="disabled">
+    Show deleted!
+  </mat-slide-toggle>
 </div>
 
-<table mat-table [dataSource]="dataSource$" class="mat-elevation-z8">
+<table mat-table [dataSource]="carriages$" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -13,6 +21,7 @@
     <th mat-header-cell *matHeaderCellDef> Carriage ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
+
 
   <ng-container matColumnDef="railId">
     <th mat-header-cell *matHeaderCellDef> Rail ID </th>
@@ -33,8 +42,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="{'background-color': row.deleted? 'red':'white'}"></tr>
 </table>
-
 
 

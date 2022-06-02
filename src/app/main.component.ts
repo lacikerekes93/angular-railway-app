@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'main',
-  template: `<mat-card>
+  template: `<h1>Railway administration system</h1>
+    <mat-card>
     <nav>
       <ul>
         <li><a mat-button routerLink="/carriages">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {select, Store} from "@ngrx/store";
 import {carriageRequestedAction, carriageUpdateAction} from "../store/carriages.actions";
@@ -18,6 +18,7 @@ export class CarriagesUpdateComponent implements OnInit {
 
   carriageForm!: FormGroup;
   carriages$: Observable<CarriageModel[]> = this.store.pipe(select(selectCarriages));
+  carriageId: string;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class CarriagesUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => {
+        this.carriageId = params.get('carriageId');
         return this.store.dispatch(carriageRequestedAction({carriageId: params.get('carriageId')!}))})
     ).subscribe();
     this.store.pipe(select(selectLoadedCarriage)).subscribe(
@@ -34,7 +36,6 @@ export class CarriagesUpdateComponent implements OnInit {
         console.log(carriage);
         console.log(this.carriageForm);
         if(carriage && this.carriageForm) {
-          this.carriageForm.controls['id'].setValue(carriage.id);
           this.carriageForm.controls['manufacturedYear'].setValue(carriage.manufacturedYear);
           this.carriageForm.controls['railId'].setValue(carriage.railId);
           this.carriageForm.controls['owner'].setValue(carriage.owner);
@@ -43,10 +44,9 @@ export class CarriagesUpdateComponent implements OnInit {
       }
     );
     this.carriageForm = this.formBuilder.group({
-      'id':[''],
-      'manufacturedYear': [''],
-      'railId': [''],
-      'owner':[''],
+      'railId': ['', [Validators.required, Validators.maxLength(20)]],
+      'manufacturedYear': ['',[Validators.required, Validators.min(1920)]],
+      'owner': ['',[Validators.required, Validators.maxLength(10)]],
       'siteId': [''],
       'deleted': [false]
     });
@@ -55,10 +55,41 @@ export class CarriagesUpdateComponent implements OnInit {
   }
 
   onSubmit(carriageData: any) {
+    carriageData.id = this.carriageId;
+    carriageData.railId = carriageData.railId.replace(/\s/g, "");
     console.log("CARRIAGEDATA", carriageData)
     this.store.dispatch(carriageUpdateAction(carriageData));
     this.carriageForm.reset();
     this.router.navigate(['/carriages']);
   }
+
+  get railId() { return this.carriageForm.get('railId'); }
+  get manufacturedYear() { return this.carriageForm.get('manufacturedYear'); }
+  get owner() { return this.carriageForm.get('owner'); }
+
+  getRailIdErrorMessage() {
+    if (this.railId.dirty || this.railId.touched) {
+      if (this.railId.hasError('required')) return 'You must enter a value!';
+      if (this.railId.hasError('maxlength')) return 'You can enter at most 20 characters!';
+    }
+    return '';
+  }
+
+  getManufacturedYearErrorMessage() {
+    if (this.manufacturedYear.dirty || this.manufacturedYear.touched) {
+      if (this.manufacturedYear.hasError('required')) return 'You must enter a value!';
+      if (this.manufacturedYear.hasError('min')) return 'Value must be greater than 1920!';
+    }
+    return '';
+  }
+
+  getOwnerErrorMessage() {
+    if (this.owner.dirty || this.owner.touched) {
+      if (this.owner.hasError('required')) return 'You must enter a value!';
+      if (this.owner.hasError('maxlength')) return 'You can enter at most 10 characters!';
+    }
+    return '';
+  }
+
 
 }
