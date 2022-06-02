@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {selectSites} from "../store/sites.selectors";
 import { Store, select } from '@ngrx/store';
 import {SitesService} from "../../sites.service";
-import {siteDeleteAction, sitesRequestedAction} from "../store/sites.actions";
+import {siteDeleteAction, sitesRequestedAction, siteReactivateAction} from "../store/sites.actions";
 
 @Component({
   selector: 'app-sites-table',
@@ -26,6 +26,10 @@ export class SitesTableComponent implements OnInit {
 
   onDelete(site: SiteModel): void {
     this.store.dispatch(siteDeleteAction({site}));
+  }
+
+  reactivate(site: SiteModel): void {
+    this.store.dispatch(siteReactivateAction({site}));
   }
 
 }

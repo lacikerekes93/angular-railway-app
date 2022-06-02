@@ -11,7 +11,8 @@ export enum SiteActionTypes {
   siteUpdate = '[Sites] Site Update',
   siteUpdated = '[Sites] Site Updated',
   siteDelete = '[Sites] Site Delete',
-  siteDeleted = '[Sites] Site Deleted'
+  siteDeleted = '[Sites] Site Deleted',
+  siteReactivate = '[Sites] Site Reactivate',
 }
 
 export const sitesRequestedAction = createAction(
@@ -47,6 +48,10 @@ export const siteUpdatedAction = createAction(
 );
 export const siteDeleteAction = createAction(
   SiteActionTypes.siteDelete,
+  props<{site: SiteModel}>()
+);
+export const siteReactivateAction = createAction(
+  SiteActionTypes.siteReactivate,
   props<{site: SiteModel}>()
 );
 export const siteDeletedAction = createAction(

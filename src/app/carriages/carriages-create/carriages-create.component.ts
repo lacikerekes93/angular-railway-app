@@ -1,18 +1,10 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import {CarriageService} from "../../carriage.service";
 import {Router} from "@angular/router";
 import {select, Store} from "@ngrx/store";
 import {carriageCreateAction, carriagesRequestedAction} from "../store/carriages.actions";
-import {SitesService} from "../../sites.service";
-import {selectCarriages} from "../store/carriages.selectors";
 import {selectSites} from "../../sites/store/sites.selectors";
 import {sitesRequestedAction} from "../../sites/store/sites.actions";
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-carriages-create',
@@ -25,7 +17,6 @@ export class CarriagesCreateComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private carriageService: CarriageService,
     private router: Router,
     private store: Store,
   ) { }

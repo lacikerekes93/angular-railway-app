@@ -87,6 +87,24 @@ export class SiteEffects {
     })
   ))
 
+  reactivateSite$ = createEffect(() => this.actions$.pipe(
+    ofType(SiteActionTypes.siteReactivate),
+    switchMap((action: any) => {
+      console.log(action)
+      return this.sitesService.reactivateSite(action.site).pipe(
+        map((item: any) => {
+          return sitesRequestedAction();
+        }),
+        catchError((err) => {
+          console.error(err);
+          return EMPTY;
+        })
+      )
+    })
+  ))
+
+
+
   constructor(
     private actions$: Actions,
     private sitesService: SitesService,

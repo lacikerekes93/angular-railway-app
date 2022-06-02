@@ -14,8 +14,7 @@ const SITE_URL = 'api/sites';
 @Injectable()
 export class CarriageService {
 
-  constructor(private requestService: RequestService,
-              private sitesService: SitesService) { }
+  constructor(private requestService: RequestService) { }
 
   getCarriages(): Observable<any> {
     const httpOptions = {

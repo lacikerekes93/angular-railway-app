@@ -23,7 +23,6 @@ export class CarriagesTableComponent implements OnInit {
   filteredOnSite = false;
 
   constructor(
-    private carriageService: CarriageService,
     private store: Store) { }
 
     dataSource$ = this.store.pipe(select(selectCarriages));
