@@ -19,6 +19,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import { CarriagesUpdateComponent } from './carriages-update/carriages-update.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSelectModule,
     MatSlideToggleModule,
     StoreModule.forFeature(fromEvents.carriagesFeatureKey, fromEvents.carriagesReducer),
     EffectsModule.forFeature([CarriageEffects]),

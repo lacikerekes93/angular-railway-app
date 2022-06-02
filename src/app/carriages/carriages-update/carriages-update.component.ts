@@ -8,6 +8,8 @@ import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {Carriage} from "../../data/carriages.data";
 import {CarriageModel} from "../store/carriages.model";
+import {selectSites} from "../../sites/store/sites.selectors";
+import {sitesRequestedAction} from "../../sites/store/sites.actions";
 
 @Component({
   selector: 'app-carriages-update',
@@ -20,12 +22,17 @@ export class CarriagesUpdateComponent implements OnInit {
   carriages$: Observable<CarriageModel[]> = this.store.pipe(select(selectCarriages));
   carriageId: string;
 
+  sites$ = this.store.pipe(select(selectSites));
+
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private  router: Router,
               private store: Store) { }
 
   ngOnInit(): void {
+
+    this.store.dispatch(sitesRequestedAction());
+
     this.route.paramMap.pipe(
       map(params => {
         this.carriageId = params.get('carriageId');

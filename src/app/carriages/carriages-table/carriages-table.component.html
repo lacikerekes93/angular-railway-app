@@ -3,13 +3,16 @@
     <mat-icon>add</mat-icon>
   </a>
 
-  <mat-slide-toggle (change)="deletedCarriageToggle($event)"
+  <mat-slide-toggle (change)="toggleDeletedCarriages($event)"
     class="example-margin"
     [color]="color"
     [checked]="checked"
     [disabled]="disabled">
     Show deleted!
   </mat-slide-toggle>
+
+  <button *ngIf="filteredOnSite" (click)="showAllCarriages()">Show all!</button>
+
 </div>
 
 <table mat-table [dataSource]="carriages$" class="mat-elevation-z8">
@@ -30,14 +33,16 @@
 
   <ng-container matColumnDef="siteName">
     <th mat-header-cell *matHeaderCellDef> Site Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
+    <td mat-cell *matCellDef="let element"><label [ngStyle]="{'cursor': 'pointer'}" (click)=filterOnSite(element.siteId)> {{element.siteName}} </label> </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>  </th>
     <td mat-cell *matCellDef="let element">
+      <div *ngIf="!element.deleted">
       <mat-icon aria-hidden="false" [routerLink]="['/carriages/edit', element.id]" aria-label="Edit">edit</mat-icon>
       <mat-icon aria-hidden="false" (click)="onDelete(element)" aria-label="Delete">delete</mat-icon>
+      </div>
     </td>
   </ng-container>
 

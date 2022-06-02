@@ -20,6 +20,7 @@ export class CarriagesTableComponent implements OnInit {
   color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
+  filteredOnSite = false;
 
   constructor(
     private carriageService: CarriageService,
@@ -34,13 +35,32 @@ export class CarriagesTableComponent implements OnInit {
     this.store.dispatch(carriagesRequestedAction());
   }
 
-  deletedCarriageToggle(changeEvent: MatSlideToggleChange) {
+  showAllCarriages(){
+    this.filteredOnSite = false;
+    if (this.checked) {
+      this.carriages$ = this.dataSource$;
+    }else{
+      this.carriages$ = this.dataSource$.pipe(
+        map((carriages: CarriageModel[]) => carriages.filter(c => c.deleted === false)));
+    }
+  }
+
+  toggleDeletedCarriages(changeEvent: MatSlideToggleChange) {
+    this.filteredOnSite = false;
     if (changeEvent.checked) {
       this.carriages$ = this.dataSource$;
     }else{
       this.carriages$ = this.dataSource$.pipe(
         map((carriages: CarriageModel[]) => carriages.filter(c => c.deleted === false)));
     }
+  }
+
+  filterOnSite(siteId: number){
+    this.filteredOnSite = true;
+    this.checked = false;
+    this.carriages$ = this.dataSource$.pipe(
+      map((carriages: CarriageModel[]) => carriages.filter(
+        c => (c.deleted === false && c.siteId === siteId))));
   }
 
   onDelete(carriage: CarriageModel): void {

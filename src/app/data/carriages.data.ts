@@ -15,7 +15,7 @@ export class CarriageTable {
     {
       id: 'Bhv',
       manufacturedYear: 2020,
-      railId: '50 55 20-05 555-7',
+      railId: '505520-05555-7',
       owner: 'MÁV',
       siteId: 1,
       deleted: false,
@@ -23,7 +23,7 @@ export class CarriageTable {
     {
       id: 'BDbhv',
       manufacturedYear: 2021,
-      railId: '50 55 20-05 555-7',
+      railId: '505520-05555-7',
       owner: 'MÁV',
       siteId: 2,
       deleted: false,
@@ -31,7 +31,7 @@ export class CarriageTable {
     {
       id: 'AcBc',
         manufacturedYear: 2022,
-      railId: '50 55 20-05 555-7',
+      railId: '505520-05555-7',
       owner: 'MÁV',
       siteId: 3,
       deleted: false,

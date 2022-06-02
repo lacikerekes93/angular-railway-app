@@ -2,8 +2,12 @@ import {Component, Inject, OnInit, Optional} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import {CarriageService} from "../../carriage.service";
 import {Router} from "@angular/router";
-import {Store} from "@ngrx/store";
-import {carriageCreateAction} from "../store/carriages.actions";
+import {select, Store} from "@ngrx/store";
+import {carriageCreateAction, carriagesRequestedAction} from "../store/carriages.actions";
+import {SitesService} from "../../sites.service";
+import {selectCarriages} from "../store/carriages.selectors";
+import {selectSites} from "../../sites/store/sites.selectors";
+import {sitesRequestedAction} from "../../sites/store/sites.actions";
 
 export interface DialogData {
   animal: string;
@@ -24,10 +28,14 @@ export class CarriagesCreateComponent implements OnInit {
     private carriageService: CarriageService,
     private router: Router,
     private store: Store,
-  ) {
-  }
+  ) { }
+
+  sites$ = this.store.pipe(select(selectSites));
 
   ngOnInit() {
+
+    this.store.dispatch(sitesRequestedAction());
+
     this.carriageForm = this.formBuilder.group({
       'id': ['', [Validators.required, Validators.maxLength(10)]],
       'railId': ['', [Validators.required, Validators.maxLength(20)]],
@@ -36,6 +44,8 @@ export class CarriagesCreateComponent implements OnInit {
       'siteId': [''],
       'deleted':[false]
     });
+
+    this.sites$.subscribe(s => console.log(s))
   }
 
   onSubmit(carriageData: any) {
