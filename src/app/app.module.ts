@@ -20,6 +20,7 @@ import { CarriagesFeatureState } from "./carriages/store/carriages.reducer";
 import { MainComponent } from "./main.component";
 import { MatCardModule } from '@angular/material/card';
 import {SitesFeatureState} from "./sites/store/sites.reducer";
+import { httpInterceptorProviders } from './http-interceptors';
 
 export interface AppState {
   carriagesFeature: CarriagesFeatureState;
@@ -42,7 +43,7 @@ export interface AppState {
     CarriagesModule,
     SitesModule,
   ],
-  providers: [RequestService, DataService, ],
+  providers: [RequestService, DataService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
