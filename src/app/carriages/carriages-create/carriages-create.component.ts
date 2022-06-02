@@ -5,6 +5,9 @@ import {select, Store} from "@ngrx/store";
 import {carriageCreateAction, carriagesRequestedAction} from "../store/carriages.actions";
 import {selectSites} from "../../sites/store/sites.selectors";
 import {sitesRequestedAction} from "../../sites/store/sites.actions";
+import {map} from "rxjs/operators";
+import {SiteModel} from "../../sites/store/sites.model";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-carriages-create',
@@ -21,7 +24,7 @@ export class CarriagesCreateComponent implements OnInit {
     private store: Store,
   ) { }
 
-  sites$ = this.store.pipe(select(selectSites));
+  sites$ = this.store.pipe(select(selectSites)).pipe(map((sites: SiteModel[]) => sites.filter((site: SiteModel) => site.deleted === false)));
 
   ngOnInit() {
 

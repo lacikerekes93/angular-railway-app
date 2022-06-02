@@ -20,10 +20,12 @@ import {MatIconModule} from "@angular/material/icon";
 import { CarriagesUpdateComponent } from './carriages-update/carriages-update.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSortModule} from '@angular/material/sort';
+import {RemoveWhiteSpacePipe} from "../pipes/remove-whitespace.pipe";
 
 
 @NgModule({
-  declarations: [CarriagesComponentSpec, CarriagesTableComponent, CarriagesCreateComponent, CarriagesCreateComponent, CarriagesUpdateComponent],
+  declarations: [CarriagesComponentSpec, CarriagesTableComponent, CarriagesCreateComponent, CarriagesCreateComponent, CarriagesUpdateComponent, RemoveWhiteSpacePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,6 +40,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSortModule,
     StoreModule.forFeature(fromEvents.carriagesFeatureKey, fromEvents.carriagesReducer),
     EffectsModule.forFeature([CarriageEffects]),
   ],

@@ -28,7 +28,7 @@
 
   <ng-container matColumnDef="railId">
     <th mat-header-cell *matHeaderCellDef> Rail ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.railId}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.railId | removeWhiteSpace}} </td>
   </ng-container>
 
   <ng-container matColumnDef="siteName">

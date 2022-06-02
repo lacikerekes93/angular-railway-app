@@ -10,6 +10,7 @@ import {Carriage} from "../../data/carriages.data";
 import {CarriageModel} from "../store/carriages.model";
 import {selectSites} from "../../sites/store/sites.selectors";
 import {sitesRequestedAction} from "../../sites/store/sites.actions";
+import {SiteModel} from "../../sites/store/sites.model";
 
 @Component({
   selector: 'app-carriages-update',
@@ -22,7 +23,7 @@ export class CarriagesUpdateComponent implements OnInit {
   carriages$: Observable<CarriageModel[]> = this.store.pipe(select(selectCarriages));
   carriageId: string;
 
-  sites$ = this.store.pipe(select(selectSites));
+  sites$ = this.store.pipe(select(selectSites)).pipe(map((sites: SiteModel[]) => sites.filter((site: SiteModel) => site.deleted === false)));
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,

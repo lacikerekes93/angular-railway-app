@@ -31,7 +31,7 @@ export class CarriageTable {
     {
       id: 'AcBc',
         manufacturedYear: 2022,
-      railId: '505520-05555-7',
+      railId: '505520-  05555-   7',
       owner: 'MÁV',
       siteId: 3,
       deleted: false,

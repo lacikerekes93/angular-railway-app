@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { CarriageService } from "../../carriage.service"
 import { Store, select } from '@ngrx/store';
 import { selectCarriages } from '../store/carriages.selectors';
@@ -8,6 +8,8 @@ import {ThemePalette} from '@angular/material/core';
 import {filter, tap} from "rxjs";
 import {map} from "rxjs/operators";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort, Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-carriages-table',
@@ -24,6 +26,8 @@ export class CarriagesTableComponent implements OnInit {
 
   constructor(
     private store: Store) { }
+
+  @ViewChild(MatSort) sort: MatSort;
 
     dataSource$ = this.store.pipe(select(selectCarriages));
 
