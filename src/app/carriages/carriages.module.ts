@@ -22,6 +22,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
 import {RemoveWhiteSpacePipe} from "../pipes/remove-whitespace.pipe";
+import {RailIdValidator} from "../validators/rail-id.validator";
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import {RemoveWhiteSpacePipe} from "../pipes/remove-whitespace.pipe";
   ],
   exports: [CarriagesTableComponent, CarriagesCreateComponent, CarriagesUpdateComponent],
   providers: [
-    CarriageService,
+    CarriageService, RailIdValidator
   ]
 })
 export class CarriagesModule { }

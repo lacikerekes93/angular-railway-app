@@ -23,7 +23,7 @@ export class CarriageTable {
     {
       id: 'BDbhv',
       manufacturedYear: 2021,
-      railId: '505520-05555-7',
+      railId: '515-5393-00167',
       owner: 'MÁV',
       siteId: 2,
       deleted: false,

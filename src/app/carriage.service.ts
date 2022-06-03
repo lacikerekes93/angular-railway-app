@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {combineLatest, Observable, tap} from 'rxjs';
+import {combineLatest, Observable, of, tap} from 'rxjs';
 import { RequestService } from './request.service';
 import { HttpHeaders } from '@angular/common/http';
 import {CarriageModel} from "./carriages/store/carriages.model";
@@ -57,6 +57,56 @@ export class CarriageService {
   deleteCarriage(carriage: CarriageModel): Observable<any> {
     carriage = Object.assign({}, carriage, {deleted: true})
     return this.updateCarriage(carriage)
+  }
+
+  getCheckSum(railId: string): Observable<any>{
+
+    function sumDigits(n) {
+      return (n - 1) % 9 + 1;
+    }
+
+    const v = railId.replace(/\D+/g, '');;
+
+    const first11Numbers = v.substring(0, v.length-1);
+    const checkSum = v.substring(v.length - 1);
+
+    console.log(first11Numbers);
+    console.log(checkSum);
+
+    var multiplied = [];
+    var resArr = [];
+
+    for (var i = 0; i < first11Numbers.length; i++) {
+
+      var multiplier = 1;
+
+      const even = ((i % 2) === 0);
+
+      if (even) {
+
+        multiplier = 2;
+      }
+
+      // @ts-ignore
+      multiplied[i] = (first11Numbers[i] * multiplier);
+    }
+
+    for (var i = 0; i < multiplied.length; i++) {
+
+      resArr[i] = sumDigits(multiplied[i]);
+
+    }
+
+    console.log(multiplied);
+    console.log(resArr)
+    const sum = resArr.reduce((acc, a) => acc + a, 0);
+    const expectedChecksum = (10 - sum % 10)% 10;
+
+    console.log('expected checksum:',expectedChecksum.toString())
+    console.log('calculated checksum:',checkSum.toString())
+
+    return of(expectedChecksum.toString()!==checkSum.toString());
+
   }
 
   /*

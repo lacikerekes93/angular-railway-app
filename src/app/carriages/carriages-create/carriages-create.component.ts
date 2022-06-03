@@ -8,6 +8,7 @@ import {sitesRequestedAction} from "../../sites/store/sites.actions";
 import {map} from "rxjs/operators";
 import {SiteModel} from "../../sites/store/sites.model";
 import {filter} from "rxjs";
+import {RailIdValidator} from "../../validators/rail-id.validator";
 
 @Component({
   selector: 'app-carriages-create',
@@ -22,6 +23,7 @@ export class CarriagesCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private store: Store,
+    private railIdValidator: RailIdValidator
   ) { }
 
   sites$ = this.store.pipe(select(selectSites)).pipe(map((sites: SiteModel[]) => sites.filter((site: SiteModel) => site.deleted === false)));
@@ -32,7 +34,7 @@ export class CarriagesCreateComponent implements OnInit {
 
     this.carriageForm = this.formBuilder.group({
       'id': ['', [Validators.required, Validators.maxLength(10)]],
-      'railId': ['', [Validators.required, Validators.maxLength(20)]],
+      'railId': ['', {validators: [Validators.required, Validators.maxLength(20)],  asyncValidators: this.railIdValidator.railIdValidatorFn(), updateOn: 'change'}],
       'manufacturedYear': ['',[Validators.required, Validators.min(1920)]],
       'owner': ['',[Validators.required, Validators.maxLength(10)]],
       'siteId': [''],

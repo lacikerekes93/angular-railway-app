@@ -11,6 +11,7 @@ import {CarriageModel} from "../store/carriages.model";
 import {selectSites} from "../../sites/store/sites.selectors";
 import {sitesRequestedAction} from "../../sites/store/sites.actions";
 import {SiteModel} from "../../sites/store/sites.model";
+import {RailIdValidator} from "../../validators/rail-id.validator";
 
 @Component({
   selector: 'app-carriages-update',
@@ -28,7 +29,8 @@ export class CarriagesUpdateComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private  router: Router,
-              private store: Store) { }
+              private store: Store,
+              private  railIdValidator: RailIdValidator) { }
 
   ngOnInit(): void {
 
@@ -52,7 +54,7 @@ export class CarriagesUpdateComponent implements OnInit {
       }
     );
     this.carriageForm = this.formBuilder.group({
-      'railId': ['', [Validators.required, Validators.maxLength(20)]],
+      'railId': ['', {validators: [Validators.required, Validators.maxLength(20)],  asyncValidators: this.railIdValidator.railIdValidatorFn(), updateOn: 'change'}],
       'manufacturedYear': ['',[Validators.required, Validators.min(1920)]],
       'owner': ['',[Validators.required, Validators.maxLength(10)]],
       'siteId': [''],
